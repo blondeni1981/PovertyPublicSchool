@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a600c29da77d4dbc80058790b13203a9" Name="Diagram1">
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.District" Width="1.5" PointX="1.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.Grade" Width="1.5" PointX="4.125" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.GraduationRate" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.Poverty" Width="1.5" PointX="4.875" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.Salary" Width="1.5" PointX="10.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.School" Width="1.5" PointX="9.125" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.SocioeconomicStatu" Width="1.5" PointX="9" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.Subject" Width="1.5" PointX="8.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.TestResult" Width="1.5" PointX="6.375" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PublicSchoolPovertyModel.Title" Width="1.5" PointX="12.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__Graduatio__Distr__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__Poverty__Distric__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__Salary__District__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__TestResul__Distr__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__TestResul__Grade__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__Graduatio__Schoo__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__Graduatio__Socio__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__Poverty__SchoolN__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__Salary__TitleId__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__TestResul__Schoo__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__TestResul__Socio__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="PublicSchoolPovertyModel.FK__TestResul__Subje__403A8C7D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

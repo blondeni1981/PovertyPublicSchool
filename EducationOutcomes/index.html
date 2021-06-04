@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Hello Lamp</h1>
+
+    <div class="container p-3 my-3 bg-light text-info">
+        <br />
+        <h5>Select a High School from the drop-down list to view the percentage of students who are below the poverty line</h5>
+
+        <select name="select-school" class="form-control" id="select-school"></select>
+        <label for="select-school">Choose a School</label>
+        <button id="school" onclick="GetSchools()" class="btn-primary">Get Schools</button>
+        <p id="school-list"></p>
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="Scripts/main.js"></script>
+</body>
+</html>

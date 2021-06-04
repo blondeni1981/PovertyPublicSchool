@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PublicSchoolPovertyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GradeId" />
+          </Key>
+          <Property Name="GradeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GraduationRate">
+          <Key>
+            <PropertyRef Name="GraduationId" />
+          </Key>
+          <Property Name="GraduationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictId" Type="int" />
+          <Property Name="SchoolId" Type="int" />
+          <Property Name="SocioeconomicStatusId" Type="int" />
+          <Property Name="GraduationRate" Type="decimal" Precision="5" Scale="5" />
+        </EntityType>
+        <EntityType Name="Poverty">
+          <Key>
+            <PropertyRef Name="PovertyId" />
+          </Key>
+          <Property Name="PovertyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictId" Type="int" />
+          <Property Name="SchoolId" Type="int" />
+          <Property Name="PovPercent" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictId" Type="int" />
+          <Property Name="TitleId" Type="int" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolId" />
+          </Key>
+          <Property Name="SchoolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="School" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SocioeconomicStatus">
+          <Key>
+            <PropertyRef Name="SocioeconomicStatusId" />
+          </Key>
+          <Property Name="SocioeconomicStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SocioeconomicStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestResults">
+          <Key>
+            <PropertyRef Name="TestResultId" />
+          </Key>
+          <Property Name="TestResultId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictId" Type="int" />
+          <Property Name="SchoolId" Type="int" />
+          <Property Name="SocioeconomicStatusId" Type="int" />
+          <Property Name="GradeId" Type="int" />
+          <Property Name="SubjectId" Type="int" />
+          <Property Name="PercentMetStandard" Type="decimal" Precision="5" Scale="5" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="TitleId" />
+          </Key>
+          <Property Name="TitleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <Association Name="FK__Graduatio__Distr__37A5467C">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="GraduationRate" Type="Self.GraduationRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="GraduationRate">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Graduatio__Schoo__38996AB5">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="GraduationRate" Type="Self.GraduationRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="GraduationRate">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Graduatio__Socio__398D8EEE">
+          <End Role="SocioeconomicStatus" Type="Self.SocioeconomicStatus" Multiplicity="0..1" />
+          <End Role="GraduationRate" Type="Self.GraduationRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SocioeconomicStatus">
+              <PropertyRef Name="SocioeconomicStatusId" />
+            </Principal>
+            <Dependent Role="GraduationRate">
+              <PropertyRef Name="SocioeconomicStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poverty__Distric__4E88ABD4">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="Poverty" Type="Self.Poverty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="Poverty">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poverty__SchoolN__4F7CD00D">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Poverty" Type="Self.Poverty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="Poverty">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salary__District__33D4B598">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salary__TitleId__34C8D9D1">
+          <End Role="Title" Type="Self.Title" Multiplicity="0..1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="TitleId" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="TitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Distr__3C69FB99">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Grade__3F466844">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="GradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Schoo__3D5E1FD2">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Socio__3E52440B">
+          <End Role="SocioeconomicStatus" Type="Self.SocioeconomicStatus" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SocioeconomicStatus">
+              <PropertyRef Name="SocioeconomicStatusId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="SocioeconomicStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Subje__403A8C7D">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PublicSchoolPovertyModelStoreContainer">
+          <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GraduationRate" EntityType="Self.GraduationRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poverty" EntityType="Self.Poverty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SocioeconomicStatus" EntityType="Self.SocioeconomicStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestResults" EntityType="Self.TestResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Graduatio__Distr__37A5467C" Association="Self.FK__Graduatio__Distr__37A5467C">
+            <End Role="District" EntitySet="District" />
+            <End Role="GraduationRate" EntitySet="GraduationRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Graduatio__Schoo__38996AB5" Association="Self.FK__Graduatio__Schoo__38996AB5">
+            <End Role="School" EntitySet="School" />
+            <End Role="GraduationRate" EntitySet="GraduationRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Graduatio__Socio__398D8EEE" Association="Self.FK__Graduatio__Socio__398D8EEE">
+            <End Role="SocioeconomicStatus" EntitySet="SocioeconomicStatus" />
+            <End Role="GraduationRate" EntitySet="GraduationRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poverty__Distric__4E88ABD4" Association="Self.FK__Poverty__Distric__4E88ABD4">
+            <End Role="District" EntitySet="District" />
+            <End Role="Poverty" EntitySet="Poverty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poverty__SchoolN__4F7CD00D" Association="Self.FK__Poverty__SchoolN__4F7CD00D">
+            <End Role="School" EntitySet="School" />
+            <End Role="Poverty" EntitySet="Poverty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salary__District__33D4B598" Association="Self.FK__Salary__District__33D4B598">
+            <End Role="District" EntitySet="District" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salary__TitleId__34C8D9D1" Association="Self.FK__Salary__TitleId__34C8D9D1">
+            <End Role="Title" EntitySet="Title" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Distr__3C69FB99" Association="Self.FK__TestResul__Distr__3C69FB99">
+            <End Role="District" EntitySet="District" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Grade__3F466844" Association="Self.FK__TestResul__Grade__3F466844">
+            <End Role="Grade" EntitySet="Grade" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Schoo__3D5E1FD2" Association="Self.FK__TestResul__Schoo__3D5E1FD2">
+            <End Role="School" EntitySet="School" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Socio__3E52440B" Association="Self.FK__TestResul__Socio__3E52440B">
+            <End Role="SocioeconomicStatus" EntitySet="SocioeconomicStatus" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Subje__403A8C7D" Association="Self.FK__TestResul__Subje__403A8C7D">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PublicSchoolPovertyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GraduationRates" Relationship="Self.FK__Graduatio__Distr__37A5467C" FromRole="District" ToRole="GraduationRate" />
+          <NavigationProperty Name="Poverties" Relationship="Self.FK__Poverty__Distric__4E88ABD4" FromRole="District" ToRole="Poverty" />
+          <NavigationProperty Name="Salaries" Relationship="Self.FK__Salary__District__33D4B598" FromRole="District" ToRole="Salary" />
+          <NavigationProperty Name="TestResults" Relationship="Self.FK__TestResul__Distr__3C69FB99" FromRole="District" ToRole="TestResults" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GradeId" />
+          </Key>
+          <Property Name="GradeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Grade1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TestResults" Relationship="Self.FK__TestResul__Grade__3F466844" FromRole="Grade" ToRole="TestResults" />
+        </EntityType>
+        <EntityType Name="GraduationRate">
+          <Key>
+            <PropertyRef Name="GraduationId" />
+          </Key>
+          <Property Name="GraduationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictId" Type="Int32" />
+          <Property Name="SchoolId" Type="Int32" />
+          <Property Name="SocioeconomicStatusId" Type="Int32" />
+          <Property Name="GraduationRate1" Type="Decimal" Precision="5" Scale="5" />
+          <NavigationProperty Name="District" Relationship="Self.FK__Graduatio__Distr__37A5467C" FromRole="GraduationRate" ToRole="District" />
+          <NavigationProperty Name="School" Relationship="Self.FK__Graduatio__Schoo__38996AB5" FromRole="GraduationRate" ToRole="School" />
+          <NavigationProperty Name="SocioeconomicStatu" Relationship="Self.FK__Graduatio__Socio__398D8EEE" FromRole="GraduationRate" ToRole="SocioeconomicStatus" />
+        </EntityType>
+        <EntityType Name="Poverty">
+          <Key>
+            <PropertyRef Name="PovertyId" />
+          </Key>
+          <Property Name="PovertyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictId" Type="Int32" />
+          <Property Name="SchoolId" Type="Int32" />
+          <Property Name="PovPercent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="District" Relationship="Self.FK__Poverty__Distric__4E88ABD4" FromRole="Poverty" ToRole="District" />
+          <NavigationProperty Name="School" Relationship="Self.FK__Poverty__SchoolN__4F7CD00D" FromRole="Poverty" ToRole="School" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictId" Type="Int32" />
+          <Property Name="TitleId" Type="Int32" />
+          <Property Name="Salary1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="District" Relationship="Self.FK__Salary__District__33D4B598" FromRole="Salary" ToRole="District" />
+          <NavigationProperty Name="Title" Relationship="Self.FK__Salary__TitleId__34C8D9D1" FromRole="Salary" ToRole="Title" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolId" />
+          </Key>
+          <Property Name="SchoolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="School1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GraduationRates" Relationship="Self.FK__Graduatio__Schoo__38996AB5" FromRole="School" ToRole="GraduationRate" />
+          <NavigationProperty Name="Poverties" Relationship="Self.FK__Poverty__SchoolN__4F7CD00D" FromRole="School" ToRole="Poverty" />
+          <NavigationProperty Name="TestResults" Relationship="Self.FK__TestResul__Schoo__3D5E1FD2" FromRole="School" ToRole="TestResults" />
+        </EntityType>
+        <EntityType Name="SocioeconomicStatu">
+          <Key>
+            <PropertyRef Name="SocioeconomicStatusId" />
+          </Key>
+          <Property Name="SocioeconomicStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SocioeconomicStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GraduationRates" Relationship="Self.FK__Graduatio__Socio__398D8EEE" FromRole="SocioeconomicStatus" ToRole="GraduationRate" />
+          <NavigationProperty Name="TestResults" Relationship="Self.FK__TestResul__Socio__3E52440B" FromRole="SocioeconomicStatus" ToRole="TestResults" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TestResults" Relationship="Self.FK__TestResul__Subje__403A8C7D" FromRole="Subject" ToRole="TestResults" />
+        </EntityType>
+        <EntityType Name="TestResult">
+          <Key>
+            <PropertyRef Name="TestResultId" />
+          </Key>
+          <Property Name="TestResultId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictId" Type="Int32" />
+          <Property Name="SchoolId" Type="Int32" />
+          <Property Name="SocioeconomicStatusId" Type="Int32" />
+          <Property Name="GradeId" Type="Int32" />
+          <Property Name="SubjectId" Type="Int32" />
+          <Property Name="PercentMetStandard" Type="Decimal" Precision="5" Scale="5" />
+          <NavigationProperty Name="District" Relationship="Self.FK__TestResul__Distr__3C69FB99" FromRole="TestResults" ToRole="District" />
+          <NavigationProperty Name="Grade" Relationship="Self.FK__TestResul__Grade__3F466844" FromRole="TestResults" ToRole="Grade" />
+          <NavigationProperty Name="School" Relationship="Self.FK__TestResul__Schoo__3D5E1FD2" FromRole="TestResults" ToRole="School" />
+          <NavigationProperty Name="SocioeconomicStatu" Relationship="Self.FK__TestResul__Socio__3E52440B" FromRole="TestResults" ToRole="SocioeconomicStatus" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK__TestResul__Subje__403A8C7D" FromRole="TestResults" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="TitleId" />
+          </Key>
+          <Property Name="TitleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Salaries" Relationship="Self.FK__Salary__TitleId__34C8D9D1" FromRole="Title" ToRole="Salary" />
+        </EntityType>
+        <Association Name="FK__Graduatio__Distr__37A5467C">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="GraduationRate" Type="Self.GraduationRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="GraduationRate">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poverty__Distric__4E88ABD4">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="Poverty" Type="Self.Poverty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="Poverty">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salary__District__33D4B598">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Distr__3C69FB99">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Grade__3F466844">
+          <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grade">
+              <PropertyRef Name="GradeId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="GradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Graduatio__Schoo__38996AB5">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="GraduationRate" Type="Self.GraduationRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="GraduationRate">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Graduatio__Socio__398D8EEE">
+          <End Role="SocioeconomicStatus" Type="Self.SocioeconomicStatu" Multiplicity="0..1" />
+          <End Role="GraduationRate" Type="Self.GraduationRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SocioeconomicStatus">
+              <PropertyRef Name="SocioeconomicStatusId" />
+            </Principal>
+            <Dependent Role="GraduationRate">
+              <PropertyRef Name="SocioeconomicStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poverty__SchoolN__4F7CD00D">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Poverty" Type="Self.Poverty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="Poverty">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salary__TitleId__34C8D9D1">
+          <End Role="Title" Type="Self.Title" Multiplicity="0..1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="TitleId" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="TitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Schoo__3D5E1FD2">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Socio__3E52440B">
+          <End Role="SocioeconomicStatus" Type="Self.SocioeconomicStatu" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SocioeconomicStatus">
+              <PropertyRef Name="SocioeconomicStatusId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="SocioeconomicStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TestResul__Subje__403A8C7D">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="TestResults" Type="Self.TestResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PublicSchoolPovertyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Districts" EntityType="Self.District" />
+          <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <EntitySet Name="GraduationRates" EntityType="Self.GraduationRate" />
+          <EntitySet Name="Poverties" EntityType="Self.Poverty" />
+          <EntitySet Name="Salaries" EntityType="Self.Salary" />
+          <EntitySet Name="Schools" EntityType="Self.School" />
+          <EntitySet Name="SocioeconomicStatus" EntityType="Self.SocioeconomicStatu" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="TestResults" EntityType="Self.TestResult" />
+          <EntitySet Name="Titles" EntityType="Self.Title" />
+          <AssociationSet Name="FK__Graduatio__Distr__37A5467C" Association="Self.FK__Graduatio__Distr__37A5467C">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="GraduationRate" EntitySet="GraduationRates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poverty__Distric__4E88ABD4" Association="Self.FK__Poverty__Distric__4E88ABD4">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Poverty" EntitySet="Poverties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salary__District__33D4B598" Association="Self.FK__Salary__District__33D4B598">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Salary" EntitySet="Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Distr__3C69FB99" Association="Self.FK__TestResul__Distr__3C69FB99">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Grade__3F466844" Association="Self.FK__TestResul__Grade__3F466844">
+            <End Role="Grade" EntitySet="Grades" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Graduatio__Schoo__38996AB5" Association="Self.FK__Graduatio__Schoo__38996AB5">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="GraduationRate" EntitySet="GraduationRates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Graduatio__Socio__398D8EEE" Association="Self.FK__Graduatio__Socio__398D8EEE">
+            <End Role="SocioeconomicStatus" EntitySet="SocioeconomicStatus" />
+            <End Role="GraduationRate" EntitySet="GraduationRates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poverty__SchoolN__4F7CD00D" Association="Self.FK__Poverty__SchoolN__4F7CD00D">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Poverty" EntitySet="Poverties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salary__TitleId__34C8D9D1" Association="Self.FK__Salary__TitleId__34C8D9D1">
+            <End Role="Title" EntitySet="Titles" />
+            <End Role="Salary" EntitySet="Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Schoo__3D5E1FD2" Association="Self.FK__TestResul__Schoo__3D5E1FD2">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Socio__3E52440B" Association="Self.FK__TestResul__Socio__3E52440B">
+            <End Role="SocioeconomicStatus" EntitySet="SocioeconomicStatus" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TestResul__Subje__403A8C7D" Association="Self.FK__TestResul__Subje__403A8C7D">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="TestResults" EntitySet="TestResults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PublicSchoolPovertyModelStoreContainer" CdmEntityContainer="PublicSchoolPovertyEntities">
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="GradeId" ColumnName="GradeId" />
+                <ScalarProperty Name="Grade1" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GraduationRates">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.GraduationRate">
+              <MappingFragment StoreEntitySet="GraduationRate">
+                <ScalarProperty Name="GraduationId" ColumnName="GraduationId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="SocioeconomicStatusId" ColumnName="SocioeconomicStatusId" />
+                <ScalarProperty Name="GraduationRate1" ColumnName="GraduationRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Poverties">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.Poverty">
+              <MappingFragment StoreEntitySet="Poverty">
+                <ScalarProperty Name="PovertyId" ColumnName="PovertyId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="PovPercent" ColumnName="PovPercent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salaries">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.Salary">
+              <MappingFragment StoreEntitySet="Salary">
+                <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="TitleId" ColumnName="TitleId" />
+                <ScalarProperty Name="Salary1" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.School">
+              <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="School1" ColumnName="School" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SocioeconomicStatus">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.SocioeconomicStatu">
+              <MappingFragment StoreEntitySet="SocioeconomicStatus">
+                <ScalarProperty Name="SocioeconomicStatusId" ColumnName="SocioeconomicStatusId" />
+                <ScalarProperty Name="SocioeconomicStatus" ColumnName="SocioeconomicStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestResults">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.TestResult">
+              <MappingFragment StoreEntitySet="TestResults">
+                <ScalarProperty Name="TestResultId" ColumnName="TestResultId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="SocioeconomicStatusId" ColumnName="SocioeconomicStatusId" />
+                <ScalarProperty Name="GradeId" ColumnName="GradeId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="PercentMetStandard" ColumnName="PercentMetStandard" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titles">
+            <EntityTypeMapping TypeName="PublicSchoolPovertyModel.Title">
+              <MappingFragment StoreEntitySet="Title">
+                <ScalarProperty Name="TitleId" ColumnName="TitleId" />
+                <ScalarProperty Name="TitleName" ColumnName="TitleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
