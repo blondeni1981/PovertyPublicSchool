@@ -1,7 +1,10 @@
 ﻿var uri = 'api/Outcomes';
+
 let mySchoolArray = [];
 let ctx = document.getElementById('myChart').getContext('2d');
 let myChart;
+let perfArraySchool = [];
+let perfArrayGrade = [];
 
 $(document).ready(function () {
     fetch(uri).then(function (response) {
@@ -48,14 +51,15 @@ GetSchoolPerformance = () => {
         }
     }).then((performanceData) => {
         console.log(performanceData);
+        perfArraySchool = performanceData.map(x => x.School)
+        perfArrayGrade = performanceData.map(x => x.AverageGrade * 100)
+        console.log(perfArraySchool)
+        console.log(perfArrayGrade)
         DrawChart();
     })
 }
 
 DrawChart = () => {
-    
-    
-    
     ctx.clearRect(0, 0, ctx.width, ctx.height);
     if (typeof myChart !== 'undefined') {
         myChart.destroy();
@@ -64,10 +68,10 @@ DrawChart = () => {
      myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: perfArraySchool,
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Percentage of Students Who Met The Standard',
+                data: perfArrayGrade,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -87,8 +91,15 @@ DrawChart = () => {
                 borderWidth: 1
             }]
         },
-        options: {
-            responsive: false
+         options: {
+             responsive: false,
+             scales: {
+                 y: {
+                     suggestedMin: 0,
+                     suggestedMax: 100
+                 }
+                 
+             }
         }
 
 
