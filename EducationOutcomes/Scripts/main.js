@@ -1,10 +1,14 @@
 ﻿var uri = 'api/Outcomes';
 
 let mySchoolArray = [];
-let ctx = document.getElementById('myChart').getContext('2d');
-let myChart;
+let ctxBarChart = document.getElementById('myBarChart').getContext('2d');
+let ctxPieChart = document.getElementById('myPieChart').getContext('2d');
+let myBarChart;
+let myPieChart;
 let perfArraySchool = [];
 let perfArrayGrade = [];
+
+//https://www.chartjs.org/docs/master/
 
 $(document).ready(function () {
     fetch(uri).then(function (response) {
@@ -37,6 +41,7 @@ GetSchools = () => {
     }).then((percentageData) => {
         console.log(percentageData);
         $('#school-list').append(percentageData[0].School1 + " students have a poverty percentage of: " + percentageData[0].PovPercent);
+        DrawPieChart(percentageData[0].School1, percentageData[0].PovPercent)
     })
 }
 
@@ -55,17 +60,17 @@ GetSchoolPerformance = () => {
         perfArrayGrade = performanceData.map(x => x.AverageGrade * 100)
         console.log(perfArraySchool)
         console.log(perfArrayGrade)
-        DrawChart();
+        DrawBarChart();
     })
 }
 
-DrawChart = () => {
-    ctx.clearRect(0, 0, ctx.width, ctx.height);
-    if (typeof myChart !== 'undefined') {
-        myChart.destroy();
+DrawBarChart = () => {
+    ctxBarChart.clearRect(0, 0, ctxBarChart.width, ctxBarChart.height);
+    if (typeof myBarChart !== 'undefined') {
+        myBarChart.destroy();
     }
     
-     myChart = new Chart(ctx, {
+     myBarChart = new Chart(ctxBarChart, {
         type: 'bar',
         data: {
             labels: perfArraySchool,
@@ -103,5 +108,33 @@ DrawChart = () => {
         }
 
 
+    });
+}
+
+DrawPieChart = (school, percentage) => {
+    console.log(percentage);
+    //Two-Step, get rid of %, then convert to float
+    slicedPercentage = parseFloat(percentage.slice(0, -1));
+    console.log(slicedPercentage);
+
+    ctxPieChart.clearRect(0, 0, ctxPieChart.width, ctxPieChart.height);
+    if (typeof myPieChart !== 'undefined') {
+        myPieChart.destroy();
+    }
+    myPieChart = new Chart(ctxPieChart, {
+        type: 'doughnut',
+        data: {
+            labels: [school+' students below Poverty Line', school+' students above Poverty Line'],
+            datasets: [
+                {
+                    label: 'Points',
+                    backgroundColor: ['#f1c40f', '#2980b9'],
+                    data: [slicedPercentage, 100-slicedPercentage]
+                }
+            ]
+        },
+        options: {
+            responsive:false
+        }
     });
 }
