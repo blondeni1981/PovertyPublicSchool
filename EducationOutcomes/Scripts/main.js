@@ -79,12 +79,16 @@ DrawBarChart = () => {
                 label: 'Percentage of Students Who Met The Standard',
                 data: perfArrayGrade,
                 backgroundColor: [
-                    '#002244',
-                    '#69BE28',
-                    '#A5ACAF',
-                    '#002244',
-                    '#69BE28',
-                    '#A5ACAF',
+                    '#793F0D',
+                    '#AC703D',
+                    '#C38E63',
+                    '#E49969',
+                    '#E5AE86',
+                    '#EEC5A9',
+                    '#9D9754',
+                    '#C7C397',
+                    '#B4A851',
+                    '#DFD27C'
                 ],
                 borderColor: [
                     'rgba(139,236,226 0.2)',
