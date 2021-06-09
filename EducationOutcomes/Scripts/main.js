@@ -8,7 +8,7 @@ let myPieChart;
 let perfArraySchool = [];
 let perfArrayGrade = [];
 
-//https://www.chartjs.org/docs/master/
+//Website for chartjs https://www.chartjs.org/docs/master/
 
 $(document).ready(function () {
     fetch(uri).then(function (response) {
@@ -64,6 +64,7 @@ GetSchoolPerformance = () => {
     })
 }
 
+//Website for chartjs https://www.chartjs.org/docs/master/
 DrawBarChart = () => {
     ctxBarChart.clearRect(0, 0, ctxBarChart.width, ctxBarChart.height);
     if (typeof myBarChart !== 'undefined') {
@@ -78,20 +79,20 @@ DrawBarChart = () => {
                 label: 'Percentage of Students Who Met The Standard',
                 data: perfArrayGrade,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    '#002244',
+                    '#69BE28',
+                    '#A5ACAF',
+                    '#002244',
+                    '#69BE28',
+                    '#A5ACAF',
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(139,236,226 0.2)',
+                    'rgba(96A5F0)',
+                    'rgba(96A5F0)',
+                    'rgba(96A5F0)',
+                    'rgba(96A5F0)',
+                    'rgba(96A5F0)'
                 ],
                 borderWidth: 1
             }]
@@ -118,11 +119,12 @@ DrawPieChart = (school, percentage) => {
     console.log(slicedPercentage);
 
     ctxPieChart.clearRect(0, 0, ctxPieChart.width, ctxPieChart.height);
+    //Destroy the PieChart so we can redraw, but it will be undefined first time through
     if (typeof myPieChart !== 'undefined') {
         myPieChart.destroy();
     }
     myPieChart = new Chart(ctxPieChart, {
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: [school+' students below Poverty Line', school+' students above Poverty Line'],
             datasets: [
