@@ -122,6 +122,7 @@
       <DependentUpon>PovertyOutcomes.edmx</DependentUpon>
       <LastGenOutput>PovertyOutcomes.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\dropdown.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -130,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DropDownBoxController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OutcomesController.cs" />
     <Compile Include="District.cs">
@@ -206,8 +208,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\DropDownBox\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Outcomes\" />
+    <Folder Include="Views\Poverty\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

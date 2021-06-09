@@ -6,18 +6,90 @@
 </head>
 <body>
     <h1>Hello Lamp</h1>
+    <div class="container-fluid text-dark" id="border">
+        <div class="row ">
+            <div class="col-sm-4">
 
-    <div class="container p-3 my-3 bg-light text-info">
-        <br />
-        <h5>Select a High School from the drop-down list to view the percentage of students who are below the poverty line</h5>
+                <br />
+                <h5>Select a High School from the drop-down list to view the percentage of students who are below the poverty line</h5>
 
-        <select name="select-school" class="form-control" id="select-school"></select>
-        <label for="select-school">Choose a School</label>
-        <button id="school" onclick="GetSchools()" class="btn-primary">Get Schools</button>
-        <p id="school-list"></p>
+                <select name="select-school" class="form-control" id="select-school"></select>
+                <label for="select-school">Choose a School</label>
+                <button id="school" onclick="GetSchools()" class="btn-primary">Get Schools</button>
+                <p id="school-list"></p>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="row"
+                <table id="PovSchoolTable" class="table table-bordered table-condensed table-striped" style="background: white; border: 3px solid black;" ;>
+                    <thead style="background: grey" ;>
+                        <tr>
+                            <th></th>
+                            <th>Pov</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="col">
+                <h3>Sales Person Sales</h3>
+                <br />
+                <br />
+
+
+                <!--<label for="socio">Socioeconomic Status</label>
+                <select name="socio" class="form-control" id="socio"></select>-->
+
+                <label for="district">Districts</label>
+                <select name="district" class="form-control" id="district"></select>
+                <input type="button" value="View Data" class="btn btn-primary" onclick="GetPovList()" />
+                <br />
+                <br />
+                <table id="PovTable" class="table table-bordered table-condensed table-striped" style="background: white; border: 3px solid black;" ;>
+                    <thead style="background: grey" ;>
+                        <tr>
+                            <th>School</th>
+                            <th>SocioEconomic Status</th>
+                            <th>Subject</th>
+                            <th>District</th>
+                            <th>Grade</th>
+                            <th>Poverty</th>
+                        </tr>
+                    </thead>
+                </table>
+
+            </div>
+        </div>
+
     </div>
+
+
 
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <script src="Scripts/main.js"></script>
 </body>
 </html>
+
+<!--<div class="row">
+           <div class="col-sm-4">
+               <label for="district">Districts</label>
+               <select name="district" class="form-control" id="district"></select>
+               <input type="button" value="View Data" class="btn btn-primary" onclick="GetDistrictList()" />
+
+               <label for="socio">Socioeconomic Status</label>
+               <select name="socio" class="form-control" id="socio"></select>
+               <input type="button" value="View Data" class="btn btn-primary" onclick="GetSocioList()" />
+
+               <label for="grade">School Grade</label>
+               <select name="grade" class="form-control" id="grade"></select>
+               <input type="button" value="View Data" class="btn btn-primary" onclick="GetGradeList()" />
+
+               <label for="subject">Subject</label>
+               <select name="subject" class="form-control" id="subject"></select>
+               <input type="button" value="View Data" class="btn btn-primary" onclick="GetSubjectList()" />
+
+               <label for="title">Title</label>
+               <select name="title" class="form-control" id="title"></select>
+               <input type="button" value="View Data" class="btn btn-primary" onclick="GetTitleList()" />
+           </div>
+       </div>-->
