@@ -17,6 +17,7 @@ namespace EducationOutcomes.Controllers
             var schools = from school in povertyEntities.Poverties
                           orderby school.School.School1
                           select new { school.School.SchoolId, school.School.School1 };
+
             return schools.ToList();
         }
 
