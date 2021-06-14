@@ -35,6 +35,36 @@
 
     </div>
 
+    <select name="school1" class="form-control" id="school2"></select>
+    <label for="school">Choose a School</label>
+
+    <label for="socio">Socioeconomic Status </label>
+    <select name="socio" class="form-control" id="socio1"></select>
+
+
+    <!--<label for="socio">Socioeconomic Status 2</label>
+    <select name="socio" class="form-control" id="socio2"></select>-->
+
+    <input type="button" value="View Data" class="btn btn-primary" onclick="GetPovList()" />
+
+    <br />
+    <br />
+    <table id="PovTable" class="table table-bordered table-condensed table-striped" style="background: white; border: 3px solid black;" ;>
+        <thead style="background: grey" ;>
+            <tr>
+                <th>District</th>
+                <th>School</th>
+                <th>SocioEconomic Status</th>
+                <!--<th>SocioEconomic Status 2</th>-->
+                <th>Poverty Percent</th>
+                <th>Graduation Rate</th>
+                <th>Percent of Students Met Standard on Test</th>
+            </tr>
+        </thead>
+    </table>
+
+
+
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <script src="Scripts/main.js"></script>
 </body>
