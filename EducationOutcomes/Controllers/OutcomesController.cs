@@ -31,6 +31,45 @@ namespace EducationOutcomes.Controllers
 
             return Ok(schoolPercentage);
         }
+
+        [System.Web.Http.Route("getSchoolPerformance")]
+        [System.Web.Http.HttpGet]
+
+        public IEnumerable<object> GetSchoolPerformance(string topLow)
+        {
+            var result = from school in povertyEntities.TestResults
+                         select new {school.School.School1, school.PercentMetStandard };
+
+            
+            var newResult = from a in result
+                            group a by a.School1 into aGroup
+                            select new
+                            {
+                                School=aGroup.Key,
+                                AverageGrade = aGroup.Average(b => b.PercentMetStandard)
+                                
+                            };
+            if(topLow == "top")
+            {
+                return newResult.OrderByDescending(a => a.AverageGrade).Take(10).ToList();
+            }
+            else
+            {
+                return newResult.OrderBy(a => a.AverageGrade).Take(10).ToList();
+            }
+            
+        }
+//        select top 10 AVG(PercentMetStandard) as SchoolAverage, S.School
+//from TestResults as TR
+//    inner join School as S
+//    on S.SchoolId=TR.SchoolId
+//    inner join District as D
+//    on D.DistrictId=TR.DistrictId
+//    inner join Subject
+//    on Subject.SubjectId=TR.SubjectId
+//where Subject.SubjectId= 1
+//Group by S.School
+//order by SchoolAverage desc
     }
 
 
