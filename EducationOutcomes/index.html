@@ -70,13 +70,13 @@
         </div>
         <div class="row">
             <div class="col">
-                <h5> Highschool: Top Preforming and Underpreforming</h5>
+                <h5> Highschool: Top Performing and Underperforming</h5>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="top-schools" name="performance" value="top">
+                    <input class="form-check-input" type="radio" id="top-schools" name="performance" value="top">
                     <label class="form-check-label" for="top">Top 10 Schools</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="low-schools" name="performance" value="low">
+                    <input class="form-check-input" type="radio" id="low-schools" name="performance" value="low">
                     <label class="form-check-label" for="low">Bottom 10 Schools</label>
                 </div>
                 <input type="button" id="btn" class="btn btn-primary active" onclick="GetSchoolPerformance()" value="Submit">
@@ -90,7 +90,7 @@
                 <select name="select-school" class="form-control" id="select-school"> </select>
                 <button id="school" onclick="GetSchools()" class="btn btn-primary active">HighSchool</button>
                 <p id="school-list"> </p>
-                <canvas id="myPieChart" width="300" height="300"> </canvas>
+                <canvas id="myPieChart" width="330" height="300"> </canvas>
             </div>
         </div>
 

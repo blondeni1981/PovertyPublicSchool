@@ -46,23 +46,27 @@ GetSchools = () => {
 }
 
 GetSchoolPerformance = () => {
-var radioValue = $("input[name='performance']:checked").val();
+    
+    var radioValue = $("input[name='performance']:checked").val();
+    if (radioValue === undefined) {
+        alert("You must select an option to see results");
 
-    console.log(radioValue);
-    fetch(uri + '/getSchoolPerformance?topLow=' + radioValue).then(function (response) {
-        if (response.ok) {
-            return response.json();
-        } else {
-            return Promise.reject(response);
-        }
-    }).then((performanceData) => {
-        console.log(performanceData);
-        perfArraySchool = performanceData.map(x => x.School)
-        perfArrayGrade = performanceData.map(x => x.AverageGrade * 100)
-        console.log(perfArraySchool)
-        console.log(perfArrayGrade)
-        DrawBarChart();
-    })
+    } else {
+        fetch(uri + '/getSchoolPerformance?topLow=' + radioValue).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                return Promise.reject(response);
+            }
+        }).then((performanceData) => {
+            console.log(performanceData);
+            perfArraySchool = performanceData.map(x => x.School)
+            perfArrayGrade = performanceData.map(x => x.AverageGrade * 100)
+            console.log(perfArraySchool)
+            console.log(perfArrayGrade)
+            DrawBarChart();
+        })
+    }
 }
 
 //Website for chartjs https://www.chartjs.org/docs/master/
