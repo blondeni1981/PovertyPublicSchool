@@ -3,69 +3,131 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link rel="icon" href="data:;base64,iVBORwOKGO=" />
+    <link rel="stylesheet" type="text/css" href="Content/Site.css">
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.css">
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
 </head>
 <body>
-    <h1>Hello</h1>
-
-    <div class="container p-3 my-3 bg-light text-info">
-        <br />
-        <h5>Select a High School from the drop-down list to view the percentage of students who are below the poverty line</h5>
-
-        <select name="select-school" class="form-control" id="select-school"></select>
-        <label for="select-school">Choose a School</label>
-        <button id="school" onclick="GetSchools()" class="btn-primary">Get Schools</button>
-        <p id="school-list"></p>
-        <canvas id="myPieChart" width="400" height="400"></canvas>
-    </div>
-
-    <div>
-        <p>Please select a choice to see top performing or underperforming schools:</p>
-        <input type="radio" id="top-schools" name="performance" value="top">
-        <label for="top">Top 10</label><br>
-        <input type="radio" id="low-schools" name="performance" value="low">
-        <label for="low">Lower 10</label><br>
-        <input type="button" id="btn" onclick="GetSchoolPerformance()" value="Submit">
-
-    </div>
-
-    <div>
-
-        <canvas id="myBarChart" width="800" height="400"></canvas>
-
-    </div>
-
-    <select name="school1" class="form-control" id="school2"></select>
-    <label for="school">Choose a School</label>
-
-    <label for="socio">Socioeconomic Status </label>
-    <select name="socio" class="form-control" id="socio1"></select>
 
 
-    <!--<label for="socio">Socioeconomic Status 2</label>
-    <select name="socio" class="form-control" id="socio2"></select>-->
+    <style>
+        body {
+            padding-top: 20px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 20px;
+            background: #DCDCDC;
+        }
+        /*Set padding to keep content from hitting the edges*/
+        .body-content {
+            padding-left: 100px;
+            padding-right: 100px;
+            background: white;
+        }
+        .row {
+            margin: auto;
+            padding-left: 100px;
+            padding-right: 100px;
+            padding-bottom:20px;
+            padding-top: 20px;
+        }
+        #border {
+            padding: 20px;
+        }
+        .col-md-6, .col {
+            float: none;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            background-color: #DBC996;
+            color: black;
+            border: 1.5px solid black;
+            display: inline-block;
+            width: 150px;
+        }
+        table, thead, th, tr, td {
+            border: 3px solid black;
+        }
+        h3, h5 {
+            background-color: darkgrey;
+            text-align: center;
+            display: table;
+            color: #333300;
+        }
 
-    <input type="button" value="View Data" class="btn btn-primary" onclick="GetPovList()" />
+    </style>
+    <div data-role="header" data-theme='a' style="background:#C2C2A3;">
 
-    <br />
-    <br />
-    <table id="PovTable" class="table table-bordered table-condensed table-striped" style="background: white; border: 3px solid black;" ;>
-        <thead style="background: grey" ;>
-            <tr>
-                <th>District</th>
-                <th>School</th>
-                <th>SocioEconomic Status</th>
-                <!--<th>SocioEconomic Status 2</th>-->
-                <th>Poverty Percent</th>
-                <th>Graduation Rate</th>
-                <th>Percent of Students Met Standard on Test</th>
-            </tr>
-        </thead>
-    </table>
+        <div class="row">
+            <div class="col">
+                <h3>Does Poverty Have a Direct Effect on a Students Success in Public Schools?</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5> Highschool: Top Preforming and Underpreforming</h5>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="top-schools" name="performance" value="top">
+                    <label class="form-check-label" for="top">Top 10 Schools</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="low-schools" name="performance" value="low">
+                    <label class="form-check-label" for="low">Bottom 10 Schools</label>
+                </div>
+                <input type="button" id="btn" class="btn btn-primary active" onclick="GetSchoolPerformance()" value="Submit">
+                <br />
+                <canvas id="myBarChart" width="800" height="400"> </canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>HighSchool Students Below the Poverty Line</h5>
+                <select name="select-school" class="form-control" id="select-school"> </select>
+                <button id="school" onclick="GetSchools()" class="btn btn-primary active">HighSchool</button>
+                <p id="school-list"> </p>
+                <canvas id="myPieChart" width="300" height="300"> </canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h5>
+                    Highschool Graduation Rate and Percent of Students That Met Standard
+                    Per Socioeconomic Status
+                </h5>
+                <select name="school1" class="form-control" id="school2"> </select>
+                <label for="school"> Choose a School</label>
+
+                <label for="socio"> Socioeconomic Status </label>
+                <select name="socio" class="form-control" id="socio1"> </select>
+                <input type="button" value="View Data" class="btn btn-primary active" onclick="GetPovList()" />
+                <br />
+                <br />
+                <table id="PovTable" class="table table-striped" style="background:#C5CBBD
 
 
 
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-    <script src="Scripts/main.js"></script>
+; border: 3px solid black;" ;>
+                    <thead style="background: linear-gradient()" ;>
+                        <tr>
+                            <th> District</th>
+                            <th> School</th>
+                            <th> SocioEconomic Status</th>
+                            <th> Poverty Percent</th>
+                            <th> Graduation Rate</th>
+                            <th> Percent of Students Met Standard on Test</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>    
+                    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+                    <script src="Scripts/main.js"></script>       
 </body>
-</html>
+        </html >

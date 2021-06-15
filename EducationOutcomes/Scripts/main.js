@@ -46,7 +46,8 @@ GetSchools = () => {
 }
 
 GetSchoolPerformance = () => {
-    var radioValue = $("input[name='performance']:checked").val();
+var radioValue = $("input[name='performance']:checked").val();
+
     console.log(radioValue);
     fetch(uri + '/getSchoolPerformance?topLow=' + radioValue).then(function (response) {
         if (response.ok) {
@@ -234,4 +235,7 @@ function PovBuildTableRow(pov) {
         "</td>"
     "</tr>";
     return ret;
+}
+function addClick() {
+    formClear();
 }
